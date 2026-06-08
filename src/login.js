@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import loginBanner from "./assets/loginbg.jpg";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,7 +11,6 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-
     if (!email || !password) {
       setError("Please fill all fields");
       return;
@@ -32,25 +31,30 @@ function Login() {
           }
         `}
       </style>
-
       <div
-        style={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          background:
-            "linear-gradient(135deg, #81a6d6 0%, #3863a7 50%, #14498f 100%)",
-        }}
-      >
-        <div
-          style={{
-            width: "380px",
-            padding: "40px",
-            color: "white",
-            textAlign: "center",
-          }}
-        >
+  style={{
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundImage: `url(${loginBanner})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}
+>
+       <div
+  style={{
+    width: "380px",
+    padding: "40px",
+    color: "white",
+    textAlign: "center",
+
+    background: "rgba(0, 0, 0, 0)",
+    borderRadius: "15px",
+    boxShadow: "0 8px 25px rgba(0,0,0,0.4)",
+    backdropFilter: "blur(8px)",
+  }}
+>
           <div
             style={{
               width: "70px",
@@ -62,11 +66,11 @@ function Login() {
               alignItems: "center",
               fontSize: "40px",
               color: "white",
+              background: "rgba(0,0,0,0.3)",
             }}
           >
             👤
           </div>
-
           <h2
             style={{
               letterSpacing: "5px",

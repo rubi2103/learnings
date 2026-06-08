@@ -138,7 +138,7 @@ function Register() {
             />
             <select style={selectStyle}>
               <option>Select Course</option>
-              <option>Full Stack Development</option>
+              <option>Full Stack Java</option>
               <option>UI/UX Design</option>
               <option>Python</option>
               <option>C++</option>
