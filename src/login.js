@@ -1,13 +1,17 @@
-import { useState } from "react";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
+
   const handleLogin = (e) => {
     e.preventDefault();
+
     if (!email || !password) {
       setError("Please fill all fields");
       return;
@@ -15,76 +19,194 @@ function Login() {
 
     setError("");
     alert("Login Successful");
+    navigate("/quiz");
   };
 
   return (
-    <div style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "100vh",
-      backgroundColor: "#f4f4f4"
-    }}>
-      <form
-        onSubmit={handleLogin}
+    <>
+      <style>
+        {`
+          input::placeholder {
+            color: white;
+            opacity: 1;
+          }
+        `}
+      </style>
+
+      <div
         style={{
-          background: "white",
-          padding: "30px",
-          borderRadius: "10px",
-          boxShadow: "0 4px 10px gray",
-          width: "300px"
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          background:
+            "linear-gradient(135deg, #81a6d6 0%, #3863a7 50%, #14498f 100%)",
         }}
       >
-        <h2 style={{ textAlign: "center" }}>
-          Student Learning Platform
-        </h2>
-
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+        <div
           style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "10px"
-          }}
-        />
-
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "10px"
-          }}
-        />
-
-        {error && (
-          <p style={{ color: "red" }}>{error}</p>
-        )}
-
-        <button
-          type="submit"
-          onClick={() => navigate("/quiz")}
-          style={{
-            width: "50%",
-            padding: "10px",
-            backgroundColor: "blue",
+            width: "380px",
+            padding: "40px",
             color: "white",
-            border: "none",
-            display: "block",        
-            margin: "20px auto",
-            cursor: "pointer"
+            textAlign: "center",
           }}
         >
-          Login
-        </button>
-      </form>
-    </div>
+          <div
+            style={{
+              width: "70px",
+              height: "70px",
+              borderRadius: "50%",
+              margin: "0 auto 20px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontSize: "40px",
+              color: "white",
+            }}
+          >
+            👤
+          </div>
+
+          <h2
+            style={{
+              letterSpacing: "5px",
+              fontWeight: "300",
+              marginBottom: "50px",
+              color: "white",
+            }}
+          >
+            LOGIN
+          </h2>
+
+          <form onSubmit={handleLogin}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                borderBottom: "1px solid white",
+                marginBottom: "25px",
+                paddingBottom: "8px",
+              }}
+            >
+              <span
+                style={{
+                  marginRight: "10px",
+                  color: "white",
+                }}
+              >
+                ✉
+              </span>
+
+              <input
+                type="email"
+                placeholder="Email ID"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                style={{
+                  width: "100%",
+                  border: "none",
+                  outline: "none",
+                  background: "transparent",
+                  color: "white",
+                  fontSize: "16px",
+                }}
+              />
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                borderBottom: "1px solid white",
+                marginBottom: "25px",
+                paddingBottom: "8px",
+              }}
+            >
+              <span
+                style={{
+                  marginRight: "10px",
+                  color: "white",
+                }}
+              >
+                🔒
+              </span>
+
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                style={{
+                  width: "100%",
+                  border: "none",
+                  outline: "none",
+                  background: "transparent",
+                  color: "white",
+                  fontSize: "16px",
+                }}
+              />
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginBottom: "25px",
+                fontSize: "14px",
+                color: "white",
+              }}
+            >
+              <label style={{ color: "white" }}>
+                <input
+                  type="checkbox"
+                  checked={remember}
+                  onChange={() => setRemember(!remember)}
+                />{" "}
+                Remember me
+              </label>
+
+              <a
+                href="/"
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                }}
+              >
+                Forgot Password?
+              </a>
+            </div>
+
+            {error && (
+              <p
+                style={{
+                  color: "#ffdddd",
+                  marginBottom: "10px",
+                }}
+              >
+                {error}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              style={{
+                width: "100%",
+                padding: "12px",
+                background: "#26292c",
+                color: "white",
+                border: "none",
+                cursor: "pointer",
+                fontWeight: "bold",
+                letterSpacing: "3px",
+                borderRadius: "5px",
+              }}
+            >
+              LOGIN
+            </button>
+          </form>
+        </div>
+      </div>
+    </>
   );
 }
 

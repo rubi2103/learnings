@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-
 function QuizPage() {
   const [time, setTime] = useState(1800);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selected, setSelected] = useState("");
-
+  const [answers, setAnswers] = useState({});
   const questions = [
     {
       question: "Who developed Python?",
@@ -49,15 +47,15 @@ function QuizPage() {
     },
     {
       question: "Which operator is used for exponentiation?",
-      options: [" ^", "**", "//", "%%"],
+      options: ["^", "**", "//", "%%"],
     },
     {
       question: "Which operator performs floor division?",
-      options: [" ^", "**", "//", "%%"],
+      options: ["^", "**", "//", "%%"],
     },
     {
       question: "Which operator gives remainder?",
-      options: [" ^", "**", "//", "%%"],
+      options: ["^", "**", "//", "%%"],
     },
     {
       question: "Which keyword is used for conditional statements?",
@@ -82,6 +80,14 @@ function QuizPage() {
     {
       question: "Which keyword exits a loop?",
       options: ["continue", "stop", " break", "exit"],
+    },
+    {
+      question: "Which keyword is used to define a function?",
+      options: ["def", "function", "func", "define"],
+    },
+    {
+      question: "Which data type stores decimal numbers?",
+      options: ["int", "function", "func", "define"],
     },
   ];
   useEffect(() => {
@@ -253,7 +259,7 @@ function QuizPage() {
             <div className="stat-box">
               <div className="label">Answered</div>
               <div className="value">
-                {selected ? 1 : 0} / {questions.length}
+                {Object.keys(answers).length} / {questions.length}
               </div>
             </div>
           </div>
@@ -308,16 +314,25 @@ function QuizPage() {
           </h2>
 
           {questions[currentQuestion].options.map((option) => (
-            <div
-              key={option}
-              className={`option ${
-                selected === option ? "selected" : ""
-              }`}
-              onClick={() => setSelected(option)}
-            >
-              {option}
-            </div>
-          ))}
+  <div
+    key={option}
+    className={`option ${
+      answers[currentQuestion] === option ? "selected" : ""
+    }`}
+    onClick={() =>
+      setAnswers({
+        ...answers,
+        [currentQuestion]: option,
+      })
+    }
+  >
+    {option}
+  </div>
+))}
+</div>
+
+{/* Buttons */}
+<div className="card">
         </div>
 
         {/* Buttons */}
@@ -327,25 +342,36 @@ function QuizPage() {
               className="btn prev"
               onClick={() => {
                 if (currentQuestion > 0) {
-                  setCurrentQuestion(currentQuestion - 1);
-                  setSelected("");
-                }
+  setCurrentQuestion(currentQuestion - 1);
+}
               }}
             >
               Previous
             </button>
 
-            <button
-              className="btn next"
-              onClick={() => {
-                if (currentQuestion < questions.length - 1) {
-                  setCurrentQuestion(currentQuestion + 1);
-                  setSelected("");
-                }
-              }}
-            >
-              Next →
-            </button>
+            {currentQuestion === questions.length - 1 ? (
+  <button
+    className="btn next"
+    onClick={() => {
+      alert(
+        `Quiz Submitted Successfully!\nAnswered: ${
+          Object.keys(answers).length
+        }/${questions.length}`
+      );
+    }}
+  >
+    Submit Quiz
+  </button>
+) : (
+  <button
+    className="btn next"
+    onClick={() => {
+      setCurrentQuestion(currentQuestion + 1);
+    }}
+  >
+    Next →
+  </button>
+)}
           </div>
         </div>
 
